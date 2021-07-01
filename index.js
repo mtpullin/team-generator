@@ -1,6 +1,7 @@
 const inq = require('inquirer');
+const fs = require('fs')
 const Employee = require('./lib/Employee');
-const generateEmployees = emplyeeArr => {}
+const generateEmployees = employeeArr => {}
 const userPrompt = () => {
 inq.prompt([{
     type: 'input',
@@ -45,8 +46,77 @@ inq.prompt([{
             console.log('Please enter employee email address')
             return false;
         }
+    }   
+},
+{
+    type: 'input',
+    name: 'github',
+    message: 'enter github user name',
+    when: ({role}) => {
+        if(role === 'Engineer') {
+            return true;
+        }else{
+            return false
+        }
+    }    
+},
+{
+    type:'input',
+    name:'office number',
+    message:'enter manager office number',
+    when: ({role}) => {
+        if(role === 'Manager'){
+            return true
+        }else {
+            return false;
+        }
     }
+},
+{ 
+    type: 'input',
+    name:'school',
+    message: 'enter intern school',
+    when:({role}) => {
+        if(role === 'Intern') {
+            return true
+        }else {
+            return false
+        }
+    }
+},
+{
+    type: 'confirm',
+    name:'repeat',
+    message:'Would you like to enter another employee?',
+    default: true
 }
-])}
+])
+.then(employeeData => {
+    employeeData.Employee.push(employeeData);
+    if(employeeData.repeat) {
+        return userPrompt(employeeData)
+    }else {
+        return employeeData
+    }
+})    
+}
+
+const generatePage = data => {
+    return new Promise((resolve, reject) => {
+        console.log(data)
+        fs.writeFile("./dist/index.html", data, err =>{
+            if(err){
+                reject(err)
+                return;
+            }
+                resolve({
+                    ok: true,
+                    message:'file created'
+            })
+        })
+    })
+}
 
 userPrompt()
+    .then((data) => {
+     generatePage(data)})

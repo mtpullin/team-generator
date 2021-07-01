@@ -5,6 +5,6 @@ test('creates employee object', () => {
 
     expect(employee.name).toBe('Mitch')
     expect(employee.id).toBe(expect.any(Number))
-    expect(employee.email).toBe(expect.any(String))
+    expect(employee.email).toBe('mitch')
 
 })
