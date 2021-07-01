@@ -9,26 +9,29 @@ const generateEmployee = employeeData => {
 
     employeeData.forEach(employee => {
         const{name, id, role} = employee;
-        let newEmployee = ''
-        let roleInfo = ''
+        let newEmployee = '';
+        let roleInfo = '';
 
-        switch(role) {
+        switch (role) {
 
             case 'Manager':
                 newEmployee = new Manager(name, id, employee.officeNumber)
                 roleInfo = newEmployee.getOfficeNumber();
+                break;
             case 'Engineer':
                 newEmployee = new Engineer(name, id, employee.github)
                 roleInfo = newEmployee.getGithub();
+                break;
             case 'Intern':
                 newEmployee = new Intern(name, id, employee.school)
                 roleInfo = newEmployee.getSchool();
+                break;
             default:
-                newEmployee = new Employee(name, id)
+                 newEmployee = new Employee(name, id)
         }
 
         employeeCard += `
-        <div class ="column is-one-quarter-desktop"
+        <div class ="column is-one-quarter-desktop">
             <div class="card">
             <div class="media">
              <div class="media-content">

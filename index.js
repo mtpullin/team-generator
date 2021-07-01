@@ -120,5 +120,5 @@ const generatePage = (data) => {
 
 
 userPrompt()
-    .then(data => generatePage(data))
-     .then(generateHTML => generatePage(generateHTML))
+    .then(data => generateHTML(data))
+     .then(html => generatePage(html))
