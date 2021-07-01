@@ -105,15 +105,19 @@ return inq.prompt([{
 
 const generatePage = data => {
         console.log(data)
-        fs.writeFile("./dist/index.html", JSONstringify(data), err =>{
+        return new Promise((resolve, reject)=> {
+        fs.writeFile("./dist/index.html", parseInt(data).toString(), err =>{
             if(err){
-                throw (err)
+                reject (err)
                 
             }
-                console.log('page created')
+                resolve({
+                    ok: true,
+                    message: 'page created'
+        })
             })
         }
-    
+)}
 
 const copyFile = () => {
     fs.copyFile('./src/style.css', './dist/style.css')
