@@ -105,7 +105,7 @@ return inq.prompt([{
 
 const generatePage = data => {
         console.log(data)
-        fs.writeFile("./dist/index.html", data, err =>{
+        fs.writeFile("./dist/index.html", JSONstringify(data), err =>{
             if(err){
                 throw (err)
                 
