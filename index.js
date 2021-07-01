@@ -103,10 +103,9 @@ return inq.prompt([{
 })    
 }
 
-const generatePage = data => {
-        console.log(data)
+const generatePage = (data) => {
         return new Promise((resolve, reject)=> {
-        fs.writeFile("./dist/index.html", parseInt(data).toString(), err =>{
+        fs.writeFile("./dist/index.html", data, err =>{
             if(err){
                 reject (err)
                 
@@ -114,15 +113,12 @@ const generatePage = data => {
                 resolve({
                     ok: true,
                     message: 'page created'
+             })
         })
-            })
-        }
+    }
 )}
 
-const copyFile = () => {
-    fs.copyFile('./src/style.css', './dist/style.css')
-}
 
 userPrompt()
-    .then((data) => {
-     generatePage(data)})
+    .then(data => generatePage(data))
+     .then(generateHTML => generatePage(generateHTML))
