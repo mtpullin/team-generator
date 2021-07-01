@@ -3,11 +3,12 @@ const Engineer = require('../lib/Engineer')
 const intern = require('../lib/Intern')
 const Manager = require('../lib/Manager')
 
-module.exports = templateData => {
-    console.log(templateData);
+// module.exports = templateData => {
+//     console.log(templateData);
 
-    const{Employee, Manager, Engineer, intern} = templateData;
-    const generatePage = employeeArr => {
+    
+    function generatePage(employeeArr){
+        const{Employee, Manager, Engineer, Intern} = employeeArr;
         return `
         <head>
         <meta charset="UTF-8">
@@ -21,11 +22,15 @@ module.exports = templateData => {
        <div class="container">
         <div class="row">
             <div class="col">
+            ${Manager}
+            ${Employee}
+            ${Engineer}
+            ${Intern}
             
 
 
 
-        `
+       </body> `
     }
-}
-
+//}
+module.exports = employeeArr => generatePage(employeeArr)

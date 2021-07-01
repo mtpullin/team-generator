@@ -1,9 +1,11 @@
 const inq = require('inquirer');
 const fs = require('fs')
 const Employee = require('./lib/Employee');
-const generateEmployees = employeeArr => {}
-const userPrompt = () => {
-inq.prompt([{
+const generateHTML = require('./src/page-template')
+const employeeArr = []
+const userPrompt = employee => {
+
+return inq.prompt([{
     type: 'input',
     name: 'name',
     message:'What is the employees name?',
@@ -91,30 +93,30 @@ inq.prompt([{
     default: true
 }
 ])
-.then(employeeData => {
-    employeeData.Employee.push(employeeData);
-    if(employeeData.repeat) {
-        return userPrompt(employeeData)
+.then(userResponse => {
+    employeeArr.push(userResponse);
+    if(userResponse.repeat) {
+        return userPrompt()
     }else {
-        return employeeData
+        return employeeArr
     }
 })    
 }
 
 const generatePage = data => {
-    return new Promise((resolve, reject) => {
         console.log(data)
         fs.writeFile("./dist/index.html", data, err =>{
             if(err){
-                reject(err)
-                return;
+                throw (err)
+                
             }
-                resolve({
-                    ok: true,
-                    message:'file created'
+                console.log('page created')
             })
-        })
-    })
+        }
+    
+
+const copyFile = () => {
+    fs.copyFile('./src/style.css', './dist/style.css')
 }
 
 userPrompt()
