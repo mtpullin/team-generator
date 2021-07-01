@@ -64,7 +64,7 @@ return inq.prompt([{
 },
 {
     type:'input',
-    name:'office number',
+    name:'officeNumber',
     message:'enter manager office number',
     when: ({role}) => {
         if(role === 'Manager'){

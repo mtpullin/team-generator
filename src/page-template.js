@@ -4,30 +4,30 @@ const Intern = require('../lib/Intern')
 const Manager = require('../lib/Manager')
 
 const generateEmployee = employeeData => {
-
+console.log(employeeData)
     let employeeCard = ''
 
     employeeData.forEach(employee => {
-        const{name, id, role,} = employee;
+        const{name, id, role, email} = employee;
         let newEmployee = '';
         let roleInfo = '';
 
         switch (role) {
 
             case 'Manager':
-                newEmployee = new Manager(name, id, employee.officeNumber)
+                newEmployee = new Manager(name, id, employee.officeNumber, email)
                 roleInfo = newEmployee.getOfficeNumber();
                 break;
             case 'Engineer':
-                newEmployee = new Engineer(name, id, employee.github)
+                newEmployee = new Engineer(name, id, employee.github, email)
                 roleInfo = newEmployee.getGithub();
                 break;
             case 'Intern':
-                newEmployee = new Intern(name, id, employee.school)
+                newEmployee = new Intern(name, id, employee.school, email)
                 roleInfo = newEmployee.getSchool();
                 break;
             default:
-                 newEmployee = new Employee(name, id)
+                 newEmployee = new Employee(name, id, email)
         }
 
         employeeCard += `
