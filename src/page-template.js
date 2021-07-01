@@ -8,7 +8,7 @@ const generateEmployee = employeeData => {
     let employeeCard = ''
 
     employeeData.forEach(employee => {
-        const{name, id, role} = employee;
+        const{name, id, role,} = employee;
         let newEmployee = '';
         let roleInfo = '';
 
